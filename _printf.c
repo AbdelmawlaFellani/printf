@@ -18,7 +18,7 @@ int str_len(char *s)
 	}
 	while (*s != '\0')
 	{
-		_putchar(s);
+		_putchar(*s);
 		s++, i++;
 	}
 	return (i);
@@ -33,7 +33,7 @@ int str_len(char *s)
 int _printf(const char *format, ...)
 {
 	va_list args;
-	char c, *str;
+	char *str, c;
 	int count = 0;
 
 	if (!format)
@@ -50,17 +50,17 @@ int _printf(const char *format, ...)
 					c = va_arg(args, int), count += str_len(&c);
 					break;
 				case 's':
-					*str = va_arg(args, char*), count += str_len(str);
+					str = va_arg(args, char *), count += str_len(str);
 					break;
 				case '%':
-					_putchar("%");
+					_putchar('%');
 					count++;
 					break;
 				case '\0':
 					va_end(args);
 					return (-1);
 				default:
-					_putchar("%"), _putchar(*format);
+					_putchar('%'), _putchar(*format);
 					count += 2;
 					break;
 			}
