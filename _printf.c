@@ -16,10 +16,10 @@ int str_len(char *s)
 		str_len("(null)");
 		return (6);
 	}
-	while (*s != '\0')
+	while (*s + i != '\0')
 	{
-		_putchar(*s);
-		s++, i++;
+		_putchar(*s + i);
+		i++;
 	}
 	return (i);
 }
@@ -36,7 +36,7 @@ int _printf(const char *format, ...)
 	char *str, c;
 	int count = 0;
 
-	if (!format)
+	if (!format || !format[0])
 		return (-1);
 	va_start(args, format);
 	while (*format)
@@ -45,7 +45,7 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == 'c')
-				c = va_arg(args, int), count += str_len(&c);
+				c = va_arg(args, int), count += _putchar(c);
 			else if (*format == 's')
 			{
 				str = va_arg(args, char *);
