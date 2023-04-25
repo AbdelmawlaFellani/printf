@@ -45,36 +45,27 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == 'c')
-			{
 				c = va_arg(args, int), count += str_len(&c);
-			}
 			else if (*format == 's')
 			{
 				str = va_arg(args, char *);
 				count += str_len(str);
 			}
 			else if (*format == '%')
-			{
-				_putchar('%');
-				count++;
-			}
+				_putchar('%'), count++;
 			else
 			{
 				_putchar('%');
 				count++;
 				if (*format)
-				{
-					_putchar(*format);
-					count++;
-				}
+					_putchar(*format), count++;
 			}
 			format++;
 		}
 		else
 		{
 			_putchar(*format);
-			count++;
-			format++;
+			count++, format++;
 		}
 	}
 	va_end(args);
