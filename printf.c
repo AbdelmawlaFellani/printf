@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * str_len - prints/calculates characters of a string
+ * str_len - function that calc/prints the length of a string
  *
  * @s: string Input
  *
- * Return: number of characters printed or (-1) in case of error
+ * Return: number of characters printed
  */
 int str_len(char* s)
 {
@@ -13,7 +13,7 @@ int str_len(char* s)
 	if (s == NULL) /* handle NULL string argument */
 	{
 		str_len("(null)");
-		return (6);
+		return (6);::Wq:Wq
 	}
 	while (s)
 	{
@@ -26,9 +26,10 @@ int str_len(char* s)
 /**
  * __printf - Prints out everything
  *
- * @fornat: String Input
+ * @format: String Input
  *
- * Return: (-1) in case of error
+ * Return: (-1) in case of error and
+ * the number of character printed in case of success.
  */
 int __printf(const char *format, ...)
 {
@@ -39,9 +40,9 @@ int __printf(const char *format, ...)
 
 	va_start(args, format);
 
-	while (*format)
+	while (format)
 	{
-		if (*format == '%')
+		if (*format == "%")
 		{
 			format++;
 			switch (*format)
@@ -52,10 +53,10 @@ int __printf(const char *format, ...)
 					break;
 				case 's':
 					char* str = va_arg(args, char*);
-					count += str_len(c);
+					count += str_len(str);
 					break;
 				case '%':
-					_putchar("%");
+					_putchar('%');
 					count++;
 					break;
 				case '\0':
