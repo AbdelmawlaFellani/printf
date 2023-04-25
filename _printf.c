@@ -33,7 +33,7 @@ int str_len(char *s)
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
+	va_list args, char c, *str;
 	int count = 0;
 
 	if (!format)
@@ -47,14 +47,10 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					char c = va_arg(args, int);
-
-					count += str_len(c);
+					c = va_arg(args, int), count += str_len(c);
 					break;
 				case 's':
-					char *str = va_arg(args, char*);
-
-					count += str_len(c);
+					*str = va_arg(args, char*), count += str_len(c);
 					break;
 				case '%':
 					_putchar("%");
@@ -71,8 +67,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(*format);
-			count++;
+			_putchar(*format), count++;
 		}
 		format++;
 	}
