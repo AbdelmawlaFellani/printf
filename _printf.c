@@ -44,30 +44,38 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			switch (*format)
+			if (*format == 'c')
 			{
-				case 'c':
-					c = va_arg(args, int), count += str_len(&c);
-					break;
-				case 's':
-					str = va_arg(args, char *), count += str_len(str);
-					break;
-				case '%':
-					_putchar('%');
-					count++;
-					break;
-				case '\0':
-					va_end(args);
-					return (-1);
-				default:
-					_putchar('%'), _putchar(*format);
-					count += 2;
-					break;
+				c = va_arg(args, int), count += str_len(&c);
 			}
+			else if (*format == 's')
+			{
+				str = va_arg(args, char *);
+				count += str_len(str);
+			}
+			else if (*format == '%')
+			{
+				_putchar('%');
+				count++;
+			}
+			else
+			{
+				_putchar('%');
+				count++;
+				if (*format)
+				{
+					_putchar(*format);
+					count++;
+				}
+			}
+			format++;
 		}
 		else
-			_putchar(*format), count++;
-		format++;
+		{
+			_putchar(*format);
+			count++;
+			format++;
+		}
 	}
 	va_end(args);
 	return (count);
