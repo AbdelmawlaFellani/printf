@@ -16,11 +16,10 @@ int str_len(char *s)
 		str_len("(null)");
 		return (6);
 	}
-	while (s)
+	while (*s != '\0')
 	{
 		_putchar(s);
-		s++;
-		i++;
+		s++, i++;
 	}
 	return (i);
 }
@@ -33,7 +32,8 @@ int str_len(char *s)
  */
 int _printf(const char *format, ...)
 {
-	va_list args, char c, *str;
+	va_list args;
+	char c, *str;
 	int count = 0;
 
 	if (!format)
@@ -47,10 +47,10 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					c = va_arg(args, int), count += str_len(c);
+					c = va_arg(args, int), count += str_len(&c);
 					break;
 				case 's':
-					*str = va_arg(args, char*), count += str_len(c);
+					*str = va_arg(args, char*), count += str_len(str);
 					break;
 				case '%':
 					_putchar("%");
@@ -66,9 +66,7 @@ int _printf(const char *format, ...)
 			}
 		}
 		else
-		{
 			_putchar(*format), count++;
-		}
 		format++;
 	}
 	va_end(args);
