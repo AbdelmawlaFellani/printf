@@ -1,6 +1,34 @@
 #include "main.h"
 
 /**
+ * print_int - prints a integer and returns its length
+ *
+ * @n: the integer to be printed
+ *
+ * Return: the length of the integer
+ */
+int print_int(unsigned int n)
+{
+	int len = 1;
+	unsigned int div = 1, rem;
+
+	while (n / div >= 10)
+	{
+		div *= 10;
+		len++;
+	}
+
+	while (div != 0)
+	{
+		rem  = n % div;
+		_putchar('0' + (n / div));
+		n = rem;
+		div /= 10;
+	}
+
+	return (len);
+}
+/**
  * print_char - prints a character and returns 1
  *
  * @c: the character to be printed
@@ -41,7 +69,7 @@ int print_str(char *s)
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count = 0;
+	int count = 0, nbr;
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
@@ -57,6 +85,13 @@ int _printf(const char *format, ...)
 				count += print_str(va_arg(args, char *));
 			else if (*format == '%')
 				count += print_char('%');
+			else if (*format == 'd' || *format == 'i')
+			{
+				nbr = va_arg(args, int);
+				if (nbr < 0)
+					count += print_char('-'), nbr = -nbr;
+				count += print_int(nbr);
+			}
 			else
 			{
 				count += print_char('%');
