@@ -2,7 +2,7 @@
 
 /**
  * print_char - prints a character and returns 1
- * 
+ *
  * @c: the character to be printed
  *
  * Return: 1
@@ -15,9 +15,9 @@ int print_char(char c)
 
 /**
  * print_str - prints a string and returns its length
- * 
+ *
  * @s: the string to be printed
- * 
+ *
  * Return: the length of the string
  */
 int print_str(char *s)
